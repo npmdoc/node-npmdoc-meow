@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/sindresorhus/meow#readme"
-
-    >meow (v3.7.0)</a>
+    <a href="https://github.com/sindresorhus/meow#readme">meow (v3.7.0)</a>
 </h1>
 <h4>CLI app helper</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.meow">module meow</a><ol>
 
@@ -97,7 +90,7 @@
     <li>description and source-code<pre class="apidocCodePre">meow = function (opts, minimistOpts) {
 	loudRejection();
 
-	if (Array.isArray(opts) || typeof opts === &#x27;string&#x27;) {
+	if (Array.isArray(opts) || typeof opts === 'string') {
 		opts = {help: opts};
 	}
 
@@ -112,39 +105,39 @@
 	minimistOpts = objectAssign({}, minimistOpts);
 
 	minimistOpts.default = mapObj(minimistOpts.default || {}, function (key, value) {
-		return [decamelize(key, &#x27;-&#x27;), value];
+		return [decamelize(key, '-'), value];
 	});
 
 	if (Array.isArray(opts.help)) {
-		opts.help = opts.help.join(&#x27;\n&#x27;);
+		opts.help = opts.help.join('\n');
 	}
 
-	var pkg = typeof opts.pkg === &#x27;string&#x27; ? require(path.join(parentDir, opts.pkg)) : opts.pkg;
+	var pkg = typeof opts.pkg === 'string' ? require(path.join(parentDir, opts.pkg)) : opts.pkg;
 	var argv = minimist(opts.argv, minimistOpts);
-	var help = redent(trimNewlines(opts.help || &#x27;&#x27;), 2);
+	var help = redent(trimNewlines(opts.help || ''), 2);
 
 	normalizePackageData(pkg);
 
 	process.title = pkg.bin ? Object.keys(pkg.bin)[0] : pkg.name;
 
 	var description = opts.description;
-	if (!description &#x26;&#x26; description !== false) {
+	if (!description &amp;&amp; description !== false) {
 		description = pkg.description;
 	}
 
-	help = (description ? &#x27;\n  &#x27; + description + &#x27;\n&#x27; : &#x27;&#x27;) + (help ? &#x27;\n&#x27; + help : &#x27;\n&#x27;);
+	help = (description ? '\n  ' + description + '\n' : '') + (help ? '\n' + help : '\n');
 
 	var showHelp = function (code) {
 		console.log(help);
 		process.exit(code || 0);
 	};
 
-	if (argv.version &#x26;&#x26; opts.version !== false) {
-		console.log(typeof opts.version === &#x27;string&#x27; ? opts.version : pkg.version);
+	if (argv.version &amp;&amp; opts.version !== false) {
+		console.log(typeof opts.version === 'string' ? opts.version : pkg.version);
 		process.exit();
 	}
 
-	if (argv.help &#x26;&#x26; opts.help !== false) {
+	if (argv.help &amp;&amp; opts.help !== false) {
 		showHelp();
 	}
 
@@ -186,3 +179,4 @@
     ]
 </div>
 </div>
+</body></html>

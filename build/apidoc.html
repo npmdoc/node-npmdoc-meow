@@ -61,12 +61,122 @@
 
     <li class="apidocModuleLi"><a href="#apidoc.module.meow">module meow</a><ol>
 
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.meow.meow">
+            function <span class="apidocSignatureSpan"></span>meow
+            <span class="apidocSignatureSpan">(opts, minimistOpts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.meow.toString">
+            function <span class="apidocSignatureSpan">meow.</span>toString
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
     </ol></li>
 
 </ol></div>
 
 <div class="apidocSectionDiv">
 <h1><a href="#apidoc.module.meow" id="apidoc.module.meow">module meow</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.meow.meow" id="apidoc.element.meow.meow">
+        function <span class="apidocSignatureSpan"></span>meow
+        <span class="apidocSignatureSpan">(opts, minimistOpts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">meow = function (opts, minimistOpts) {
+	loudRejection();
+
+	if (Array.isArray(opts) || typeof opts === &#x27;string&#x27;) {
+		opts = {help: opts};
+	}
+
+	opts = objectAssign({
+		pkg: readPkgUp.sync({
+			cwd: parentDir,
+			normalize: false
+		}).pkg,
+		argv: process.argv.slice(2)
+	}, opts);
+
+	minimistOpts = objectAssign({}, minimistOpts);
+
+	minimistOpts.default = mapObj(minimistOpts.default || {}, function (key, value) {
+		return [decamelize(key, &#x27;-&#x27;), value];
+	});
+
+	if (Array.isArray(opts.help)) {
+		opts.help = opts.help.join(&#x27;\n&#x27;);
+	}
+
+	var pkg = typeof opts.pkg === &#x27;string&#x27; ? require(path.join(parentDir, opts.pkg)) : opts.pkg;
+	var argv = minimist(opts.argv, minimistOpts);
+	var help = redent(trimNewlines(opts.help || &#x27;&#x27;), 2);
+
+	normalizePackageData(pkg);
+
+	process.title = pkg.bin ? Object.keys(pkg.bin)[0] : pkg.name;
+
+	var description = opts.description;
+	if (!description &#x26;&#x26; description !== false) {
+		description = pkg.description;
+	}
+
+	help = (description ? &#x27;\n  &#x27; + description + &#x27;\n&#x27; : &#x27;&#x27;) + (help ? &#x27;\n&#x27; + help : &#x27;\n&#x27;);
+
+	var showHelp = function (code) {
+		console.log(help);
+		process.exit(code || 0);
+	};
+
+	if (argv.version &#x26;&#x26; opts.version !== false) {
+		console.log(typeof opts.version === &#x27;string&#x27; ? opts.version : pkg.version);
+		process.exit();
+	}
+
+	if (argv.help &#x26;&#x26; opts.help !== false) {
+		showHelp();
+	}
+
+	var _ = argv._;
+	delete argv._;
+
+	return {
+		input: _,
+		flags: camelcaseKeys(argv),
+		pkg: pkg,
+		help: help,
+		showHelp: showHelp
+	};
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.meow.toString" id="apidoc.element.meow.toString">
+        function <span class="apidocSignatureSpan">meow.</span>toString
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">toString = function () {
+    return toString;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 </div>
 
